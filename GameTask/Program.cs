@@ -71,7 +71,7 @@ namespace GameTask
             char[] tempNum = _playerOneNumber.ToString().ToCharArray();
             Array.Reverse(tempNum);
             string answer = new string(tempNum);
-                
+
             return Convert.ToInt32(answer);
         }
 
@@ -100,44 +100,44 @@ namespace GameTask
                 switch (lowerAnswer)
                 {
                     case 'y':
-                    {
-                        Write($"\n\nInsert full number (first digit is {_trueDigit.ToString()[0]}): ");
-                        userAnswer = Convert.ToInt32(ReadLine());
-
-                        if (userAnswer == _trueDigit)
                         {
-                            return userAnswer;
+                            Write($"\n\nInsert full number (first digit is {_trueDigit.ToString()[0]}): ");
+                            userAnswer = Convert.ToInt32(ReadLine());
+
+                            if (userAnswer == _trueDigit)
+                            {
+                                return userAnswer;
+                            }
+                            else
+                            {
+                                ForegroundColor = ConsoleColor.DarkRed;
+                                WriteLine($"\nWrong! Try again.\n");
+                                ResetColor();
+                            }
+
+                            break;
                         }
-                        else
+                    case 'n':
+                        {
+                            ForegroundColor = ConsoleColor.DarkGreen;
+                            WriteLine($"\n\n1. First digit is {_trueDigit.ToString()[0]}\n" +
+                                      $"2. Second digit always matters 9\n" +
+                                      $"3. Third number formula is {_trueDigit.ToString()[1]} - {_trueDigit.ToString()[0]} = {_trueDigit.ToString()[2]}\n");
+                            ResetColor();
+
+                            int computerAnswerThirdNum = Convert.ToInt32(_trueDigit.ToString()[1]) -
+                                                         Convert.ToInt32(_trueDigit.ToString()[0]);
+                            int compAnswer = Convert.ToInt32($"{_trueDigit.ToString()[0]}9{computerAnswerThirdNum}");
+
+                            return compAnswer;
+                        }
+                    default:
                         {
                             ForegroundColor = ConsoleColor.DarkRed;
-                            WriteLine($"\nWrong! Try again.\n");
+                            WriteLine($"\nError! The answer can only be 'Y' or 'N'! Try again!\n");
                             ResetColor();
+                            break;
                         }
-
-                        break;
-                    }
-                    case 'n':
-                    {
-                        ForegroundColor = ConsoleColor.DarkGreen;
-                        WriteLine($"\n\n1. First digit is {_trueDigit.ToString()[0]}\n" +
-                                  $"2. Second digit always matters 9\n" +
-                                  $"3. Third number formula is {_trueDigit.ToString()[1]} - {_trueDigit.ToString()[0]} = {_trueDigit.ToString()[2]}\n");
-                        ResetColor();
-
-                        int computerAnswerThirdNum = Convert.ToInt32(_trueDigit.ToString()[1]) -
-                                                     Convert.ToInt32(_trueDigit.ToString()[0]);
-                        int compAnswer = Convert.ToInt32($"{_trueDigit.ToString()[0]}9{computerAnswerThirdNum}");
-
-                        return compAnswer;
-                    }
-                    default:
-                    {
-                        ForegroundColor = ConsoleColor.DarkRed;
-                        WriteLine($"\nError! The answer can only be 'Y' or 'N'! Try again!\n"); 
-                        ResetColor();
-                        break;
-                    }
                 }
             }
         }
